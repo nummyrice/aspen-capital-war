@@ -27,3 +27,8 @@ Migrate(app, db)
         notes:
             - remember to excape() user provided values rendered in the output when returning HTML
 '''
+
+
+@app.route('/')
+def hello_world():
+    return "<p>Hello, World!</p>"

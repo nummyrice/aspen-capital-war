@@ -5,10 +5,6 @@ from .models import db, Player
 
 api_routes = Blueprint('api_routes', __name__)
 
-@api_routes.route('/')
-def hello_world():
-    return "<p>Hello, World!</p>"
-
 @api_routes.route('start-game', methods=['POST'])
 def get_decks():
     '''
@@ -23,8 +19,8 @@ def get_decks():
     if len(player_1) > 20 or len(player_2) > 20:
         return "player names must be under 20 characters", 400
     # get player name from database
-    player_1_db_result = db.session.query(Player).first(Player.name == player_1)
-    player_2_db_result = db.session.query(Player).first(Player.name == player_2)
+    player_1_db_result = db.session.query(Player).filter(Player.name == player_1).first()
+    player_2_db_result = db.session.query(Player).filter(Player.name == player_2).first()
     # or add to database if doesn't exist
     if not player_1_db_result:
         player_1_db_result = Player(name=player_1)
@@ -44,14 +40,14 @@ def get_decks():
     winner = play_script[-1]['winner']
     #update player records
     if winner == 'tie':
-        player_1_db_result['ties'] += 1
-        player_2_db_result['ties'] += 1
+        player_1_db_result.ties += 1
+        player_2_db_result.ties += 1
     elif winner == player_1_db_result.name:
-        player_1_db_result['wins'] += 1
-        player_2_db_result['losses'] += 1
+        player_1_db_result.wins += 1
+        player_2_db_result.losses += 1
     else:
-        player_1_db_result['losses'] += 1
-        player_2_db_result['wins'] += 1
+        player_1_db_result.losses += 1
+        player_2_db_result.wins += 1
     db.session.commit()
     return {'play_script': play_script}
 
