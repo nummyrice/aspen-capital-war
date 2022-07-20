@@ -1,14 +1,16 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+from .models import db, Player
+from .config import Config
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = ''
-app.config['SQLALCHEMY_RECORD_QUERIES'] = True
-app.config['FLASK_ENV'] = 'development'
-db = SQLAlchemy(app)
+app.config.from_object(Config)
+db.init_app(app)
+Migrate(app, db)
 
 '''
     todo:
+    SQLALCHEMY_RECORD_QUERIES
         - configure ORM
         - initialize db
         - set environment variables
@@ -28,12 +30,15 @@ db = SQLAlchemy(app)
 def hello_world():
     return "<p>Hello, World!</p>"
 
-@app.route('/start-game')
+@app.route('/start-game', ['POST'])
 def get_decks():
+
     '''
         when this route is reached:
+            - add player1 and player2 names to the database
             - a deck for player_1 and player_2 are created and returned
     '''
+
     return "Game Ended"
 
 @app.route('/all-time-record')
