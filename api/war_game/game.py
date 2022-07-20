@@ -77,6 +77,8 @@ class Game:
             'card_a_string': self.get_card_string(card_a),
             'card_b_string': self.get_card_string(card_b)
         }
+        # print('-------------------------------------')
+        # print(card_a, card_b)
         if card_a[1] > card_b[1]:
             turn_record['result'] = self.deck_a.player
             self.play_script.append(turn_record)
@@ -96,13 +98,13 @@ class Game:
         result = {
             'turns': self.turns
         }
-        if not self.deck_a and not self.deck_b:
-            result['result'] = 'tie'
+        if not self.deck_a.cards and not self.deck_b.cards:
+            result['winner'] = 'tie'
             self.play_script.append(result)
             return self.play_script
-        elif self.deck_a:
-            result['result'] = self.deck_a.player
+        elif self.deck_a.cards:
+            result['winner'] = self.deck_a.player
         else:
-            result['result'] = self.deck_b.player
+            result['winner'] = self.deck_b.player
         self.play_script.append(result)
         return self.play_script
