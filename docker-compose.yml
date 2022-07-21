@@ -1,0 +1,25 @@
+services:
+  postgres:
+    container_name: "postgres_db"
+    image: postgres
+    environment:
+      POSTGRES_USER: aspen_capital_war_dev
+      POSTGRES_PASSWORD: apply91
+      POSTGRES_DB: aspen_capital_war_db
+    ports:
+      - "35432:5432"
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    container_name: server
+    command: bash -c "flask db upgrade && flask run --host=0.0.0.0 --port=5001"
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app:rw
+    environment:
+      DATABASE_URL: postgresql://aspen_capital_war_dev:apply91@postgres_db:5432/aspen_capital_war_db
+      PORT: 5001

@@ -1,0 +1,110 @@
+.App {
+  text-align: center;
+}
+
+h1 {
+  height: 70px;
+  text-align: center;
+  width: 1500px;
+}
+.arena {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1500px;
+  justify-content: center;
+  gap: 50px;
+  height: 100%;
+}
+
+.deck {
+  width: 250px;
+  height: 350px;
+  border: 1px solid black;
+  background-color: midnightblue;
+  border-radius: 10px;
+  color: white;
+  font-size: 25px;
+  text-align: center;
+  line-height: 350px;
+
+}
+
+.line {
+  width: 1px;
+  border-right: 1px solid black;
+}
+
+.drawcard {
+  width: 250px;
+  height: 350px;
+  border: 1px solid black;
+  border-radius: 10px;
+  color: black;
+  font-size: 25px;
+  text-align: center;
+  line-height: 350px;
+}
+
+.actions {
+  display: flex;
+  width: 1500px;
+  justify-content: center;
+}
+
+.actions input {
+  margin: 70px;
+  text-transform: uppercase;
+  width: 100px;
+}
+
+.actions button {
+  width: 100px;
+  height: 50px;
+  margin: 70px;
+}
+
+.record {
+  margin: 70px;
+}
+
+.war {
+  position: absolute;
+  font-size: 90px;
+
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

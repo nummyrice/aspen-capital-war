@@ -21,7 +21,7 @@ class Game:
             card_string = f"{val} of {card_string}"
         return card_string
 
-    def tie(self, tie_stack: list[tuple]) -> None:
+    def tie(self, tie_stack:list[tuple]) -> None:
         '''
             handles tie scenario
             breaks out if either deck runs out of cards
@@ -95,16 +95,13 @@ class Game:
     def play(self) -> list[dict]:
         while self.deck_a.cards and self.deck_b.cards:
             self.turn()
-        result = {
-            'turns': self.turns
+        game_script = {
+            'play_script': self.play_script
         }
         if not self.deck_a.cards and not self.deck_b.cards:
-            result['winner'] = 'tie'
-            self.play_script.append(result)
-            return self.play_script
+            game_script['match_result'] = 'tie'
         elif self.deck_a.cards:
-            result['winner'] = self.deck_a.player
+            game_script['match_result'] = self.deck_a.player
         else:
-            result['winner'] = self.deck_b.player
-        self.play_script.append(result)
-        return self.play_script
+            game_script['match_result'] = self.deck_b.player
+        return game_script
