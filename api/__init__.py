@@ -3,13 +3,14 @@ from flask_migrate import Migrate
 from .models import db, Player
 from .config import Config
 from .routes import api_routes
+from flask_cors import CORS
 
 app = Flask(__name__)
 app.config.from_object(Config)
 app.register_blueprint(api_routes, url_prefix='/')
 db.init_app(app)
 Migrate(app, db)
-
+CORS(app)
 '''
     todo:
     SQLALCHEMY_RECORD_QUERIES
@@ -32,3 +33,6 @@ Migrate(app, db)
 @app.route('/')
 def hello_world():
     return "<p>Hello, World!</p>"
+
+if __name__ =='__main__':
+    app.run(host='0.0.0.0', port=5001, debug=True)
